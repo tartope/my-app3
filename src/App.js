@@ -1,23 +1,23 @@
-import logo from './logo.svg';
+import { QueryClient, QueryClientProvider } from 'react-query';
 import './App.css';
+import { RedStripe } from './RedStripe';
+import { BlueStripe } from './BlueStripe';
+import { RecoilRoot } from 'recoil';
+import { GreenStripe } from './GreenStripe';
+
+const queryClient = new QueryClient();
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <QueryClientProvider client={queryClient}>
+        {/* We are telling Recoil we want to share data between RedStripe and BlueStripe. Any components outside of this scope will not be able to share data. */}
+        <RecoilRoot>
+          <RedStripe />
+          <BlueStripe />
+          <GreenStripe />
+        </RecoilRoot>
+      </QueryClientProvider>
     </div>
   );
 }
